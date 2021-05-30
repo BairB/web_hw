@@ -43,12 +43,20 @@ public class WebTest {
         List<WebElement> textFields = driver.findElements(By.className("input__control"));
         textFields.get(0).sendKeys("Иванов Иван");
         textFields.get(1).sendKeys("+79263334455");
-//        driver.findElement().sendKeys("Иванов Иван");
-//        driver.findElement().sendKeys("+79263334455");
+
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
         String message = driver.findElement(By.className("paragraph")).getText();
         Assertions.assertEquals("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", message);
     }
 
+
+    @Test
+    void shouldTestWrongName() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("input[type='text']")).sendKeys("Ivanov Ivan");
+        driver.findElement(By.cssSelector("button[type='button']")).click();
+        String message = driver.findElement(By.cssSelector("span[data-test-id = \"name\"] span + span +span")).getText();
+        Assertions.assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", message);
+    }
 }
