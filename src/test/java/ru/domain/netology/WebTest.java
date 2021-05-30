@@ -1,5 +1,6 @@
 package ru.domain.netology;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,9 @@ public class WebTest {
     @BeforeAll
     static void setUpAll() {
         // убедитесь, что файл chromedriver.exe расположен именно в каталоге C:\tmp
-        System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
+
     }
 
     @BeforeEach
