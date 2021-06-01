@@ -17,13 +17,14 @@ public class WebTest {
     @BeforeAll
     static void setUpAll() {
         // убедитесь, что файл chromedriver.exe расположен именно в каталоге C:\tmp
-//        System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
         WebDriverManager.chromedriver().setup();
 
     }
 
     @BeforeEach
     void setUp() {
+        driver = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
@@ -40,10 +41,8 @@ public class WebTest {
     @Test
     void shouldTestSomething() {
         driver.get("http://localhost:9999");
-        List<WebElement> textFields = driver.findElements(By.className("input__control"));
-        textFields.get(0).sendKeys("Иванов Иван");
-        textFields.get(1).sendKeys("+79263334455");
-
+        driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79263334455");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
         String message = driver.findElement(By.className("paragraph")).getText();
