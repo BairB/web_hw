@@ -10,14 +10,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WebTest {
+public class WebTestTask1 {
 
     private WebDriver driver;
 
     @BeforeAll
     static void setUpAll() {
         // убедитесь, что файл chromedriver.exe расположен именно в каталоге C:\tmp
-        System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\tmp\\chromedriver.exe");
         WebDriverManager.chromedriver().setup();
 
     }
@@ -28,7 +28,7 @@ public class WebTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
